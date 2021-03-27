@@ -52,9 +52,13 @@ const CoinPage = () => {
     const hour = a.getHours();
     const min = a.getMinutes();
     const sec = a.getSeconds();
-    const time =
-      date + " " + month + " " + year + " " + hour + ":" + min + ":" + sec;
-    return time;
+    if (interval === 1) {
+      return `${date} ${month} ${hour < 10 ? "0" : ""}${hour}:${
+        min < 10 ? "0" : ""
+      }${min}:${sec < 10 ? "0" : ""}${sec}`;
+    }
+    if (interval <= 30) return `${date} ${month} ${year}`;
+    return `${month} ${year}`;
   }
 
   const renderGraph = () => {
@@ -101,9 +105,8 @@ const CoinPage = () => {
             ticks: {
               fontColor: "rgb(230,230,230)",
               fontSize: 18,
-              beginAtZero: false,
               callback: function (value, index, values) {
-                return "$" + value;
+                return "$ " + value;
               },
             },
           },
@@ -112,10 +115,11 @@ const CoinPage = () => {
           {
             ticks: {
               fontColor: "rgb(230,230,230)",
-              fontSize: 18,
-              autoSkip: true,
-              maxTicksLimit: 5,
-              beginAtZero: false
+              fontSize: 15,
+              maxTicksLimit: 6,
+              maxRotation: 0,
+              minRotation: 0,
+              padding: 50,
             },
           },
         ],
