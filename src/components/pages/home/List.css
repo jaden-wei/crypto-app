@@ -38,3 +38,7 @@
   width: 2rem;
   height: 2rem;
 }
+
+.coin-table-row td a{
+  color: white !important;
+}

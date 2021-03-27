@@ -15,7 +15,6 @@ const Navbar = () => {
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
-        <div>
           <div className="navbar">
             <Link to="#" className="menu-bars">
               <FaIcons.FaBars onClick={toggleNav} />
@@ -40,10 +39,9 @@ const Navbar = () => {
               })}
             </ul>
           </nav>
-        </div>
       </IconContext.Provider>
     </>
   );
-}
+};
 
 export default Navbar;
