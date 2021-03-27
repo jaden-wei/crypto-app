@@ -3,12 +3,12 @@ import { useLocation } from "react-router";
 import axios from "axios";
 import Chart from "chart.js";
 
-import "./Graph.css";
+import "./CoinPage.css";
 
-const Graph = () => {
+const CoinPage = () => {
   const [coinData, setCoinData] = useState([]);
   const [coinInfo, setCoinInfo] = useState([]);
-  const [interval, setInterval] = useState("max");
+  const [interval, setInterval] = useState(100000);
 
   const location = useLocation();
   const parts = location.pathname.split("/");
@@ -30,13 +30,40 @@ const Graph = () => {
     await setCoinInfo(info.data);
   };
 
+  function convertTime(unix) {
+    const a = new Date(unix);
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const year = a.getFullYear();
+    const month = months[a.getMonth()];
+    const date = a.getDate();
+    const hour = a.getHours();
+    const min = a.getMinutes();
+    const sec = a.getSeconds();
+    const time =
+      date + " " + month + " " + year + " " + hour + ":" + min + ":" + sec;
+    return time;
+  }
+
   const renderGraph = () => {
     let dates = [];
     let prices = [];
 
-    for (var i = 0; i < coinData.length; i++) {
-      dates.push(i);
-      prices.push(coinData[i][1]);
+    for (let i = 0; i < coinData.length; i++) {
+      dates.push(convertTime(coinData[i][0]));
+      prices.push(Math.round(coinData[i][1] * 100) / 100);
     }
 
     const ctx1 = document.getElementById("chart");
@@ -84,7 +111,11 @@ const Graph = () => {
         xAxes: [
           {
             ticks: {
-              display: false,
+              fontColor: "rgb(230,230,230)",
+              fontSize: 18,
+              autoSkip: true,
+              maxTicksLimit: 5,
+              beginAtZero: false
             },
           },
         ],
@@ -124,7 +155,7 @@ const Graph = () => {
           <button onClick={() => setInterval(356)} className="interval">
             1y
           </button>
-          <button onClick={() => setInterval("max")} className="interval">
+          <button onClick={() => setInterval(100000)} className="interval">
             Max
           </button>
         </div>
@@ -135,4 +166,4 @@ const Graph = () => {
   );
 };
 
-export default Graph;
+export default CoinPage;

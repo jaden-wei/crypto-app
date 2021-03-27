@@ -7,7 +7,7 @@ const Coin = ({ input, coinData }) => {
       <tr className="coin-table-row">
         <td>
           <img src={coinData.image} alt="logo" className="coin-logo" />
-          <Link to={`/graph/${coinData.id}`}>
+          <Link to={`/coinpage/${coinData.id}`}>
             {coinData.name}
           </Link>
           <span className="coin-symbol">{coinData.symbol}</span>
