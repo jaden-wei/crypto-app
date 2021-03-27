@@ -51,14 +51,10 @@ const CoinPage = () => {
     const month = months[a.getMonth()];
     const date = a.getDate();
     const hour = a.getHours();
-    const min = a.getMinutes();
-    const sec = a.getSeconds();
     if (interval === 1) {
-      return `${hour < 10 ? "0" : ""}${hour}:${min < 10 ? "0" : ""}${min}:${
-        sec < 10 ? "0" : ""
-      }${sec}`;
+      return `${(hour + 11) % 12 + 1}${hour < 12 ? 'AM' : 'PM'}`;
     }
-    if (interval <= 30) return `${date} ${month} ${year}`;
+    if (interval <= 30) return `${date} ${month}`;
     return `${month} ${year}`;
   }
 
@@ -117,7 +113,7 @@ const CoinPage = () => {
           {
             ticks: {
               fontColor: "rgb(230,230,230)",
-              fontSize: 15,
+              fontSize: 18,
               padding: 50,
               maxRotation: 0,
               minRotation: 0,
