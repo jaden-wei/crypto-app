@@ -8,7 +8,7 @@ import "./CoinPage.css";
 const CoinPage = () => {
   const [coinData, setCoinData] = useState([]);
   const [coinInfo, setCoinInfo] = useState([]);
-  const [interval, setInterval] = useState(100000);
+  const [interval, setInterval] = useState("max");
 
   const location = useLocation();
   const parts = location.pathname.split("/");
@@ -16,6 +16,7 @@ const CoinPage = () => {
 
   useEffect(() => {
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [interval]);
 
   const getData = async () => {
@@ -53,9 +54,9 @@ const CoinPage = () => {
     const min = a.getMinutes();
     const sec = a.getSeconds();
     if (interval === 1) {
-      return `${date} ${month} ${hour < 10 ? "0" : ""}${hour}:${
-        min < 10 ? "0" : ""
-      }${min}:${sec < 10 ? "0" : ""}${sec}`;
+      return `${hour < 10 ? "0" : ""}${hour}:${min < 10 ? "0" : ""}${min}:${
+        sec < 10 ? "0" : ""
+      }${sec}`;
     }
     if (interval <= 30) return `${date} ${month} ${year}`;
     return `${month} ${year}`;
@@ -66,7 +67,7 @@ const CoinPage = () => {
     let prices = [];
 
     for (let i = 0; i < coinData.length; i++) {
-      dates.push(convertTime(coinData[i][0]));
+      dates.push(coinData[i][0]);
       prices.push(Math.round(coinData[i][1] * 100) / 100);
     }
 
@@ -105,7 +106,8 @@ const CoinPage = () => {
             ticks: {
               fontColor: "rgb(230,230,230)",
               fontSize: 18,
-              callback: function (value, index, values) {
+              padding: 40,
+              callback: function (value) {
                 return "$ " + value;
               },
             },
@@ -116,10 +118,13 @@ const CoinPage = () => {
             ticks: {
               fontColor: "rgb(230,230,230)",
               fontSize: 15,
-              maxTicksLimit: 6,
+              padding: 50,
               maxRotation: 0,
               minRotation: 0,
-              padding: 50,
+              maxTicksLimit: 11,
+              callback: function (value) {
+                return convertTime(value);
+              },
             },
           },
         ],
@@ -159,7 +164,7 @@ const CoinPage = () => {
           <button onClick={() => setInterval(356)} className="interval">
             1y
           </button>
-          <button onClick={() => setInterval(100000)} className="interval">
+          <button onClick={() => setInterval(10000)} className="interval">
             Max
           </button>
         </div>
