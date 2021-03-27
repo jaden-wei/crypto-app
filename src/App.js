@@ -7,6 +7,7 @@ import Home from "./components/pages/Home";
 import News from "./components/pages/News";
 import About from "./components/pages/About";
 import Contact from "./components/pages/Contact";
+import Graph from "./components/pages/home/Graph";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
                     <Route path="/news" component={News}/>
                     <Route path="/about" component={About}/>
                     <Route path="/contact" component={Contact}/>
+                    <Route path="/graph/:id" component={Graph}/>
                 </Switch>
             </Router>
             {/* <List /> */}

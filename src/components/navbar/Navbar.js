@@ -7,7 +7,7 @@ import { IconContext } from "react-icons";
 
 import "./Navbar.css";
 
-function Navbar() {
+const Navbar = () => {
   const [clicked, setClicked] = useState(false);
 
   const toggleNav = () => setClicked(!clicked);

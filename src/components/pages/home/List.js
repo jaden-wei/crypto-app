@@ -5,9 +5,11 @@ import * as ReactBootStrap from "react-bootstrap";
 import Coin from "./Coin";
 
 import "./List.css";
+import Search from "./Search";
 
 const List = () => {
   const [cryptoData, setCryptoData] = useState([]);
+  const [input, setInput] = useState("");
 
   useEffect(() => {
     updateData();
@@ -22,20 +24,18 @@ const List = () => {
   };
 
   const renderCoinData = () => {
-    console.log(cryptoData);
     return cryptoData.map((coin, index) => {
-      return <Coin key={index} coinData={cryptoData[index]} />;
+      return <Coin input={input} key={index} coinData={cryptoData[index]} />;
     });
   };
 
   return (
     <div className="coin-list">
+      <Search input={input} setInput={setInput}/>
       <ReactBootStrap.Table variant="dark">
         <thead>
           <tr>
-            <th>
-              <span>Name</span>
-            </th>
+            <th>Name</th>
             <th>Price</th>
             <th>24h %</th>
             <th>Market Cap</th>
@@ -43,7 +43,6 @@ const List = () => {
           </tr>
         </thead>
         {cryptoData.length > 0 ? <tbody>{renderCoinData()}</tbody> : null}
-        <tbody>{renderCoinData()}</tbody>
       </ReactBootStrap.Table>
     </div>
   );
