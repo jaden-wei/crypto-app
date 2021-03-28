@@ -13,7 +13,7 @@
 }
 
 .coin-list-options {
-  margin-bottom: 5vh;
+  margin: 5vh 0;
   display: flex;
   flex-direction: row;
   align-items: center;

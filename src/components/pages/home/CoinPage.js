@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router";
 import axios from "axios";
 import Chart from "chart.js";
+import { AiFillCaretLeft } from "react-icons/ai";
 
 import "./CoinPage.css";
+import { useHistory } from "react-router-dom";
 
-const CoinPage = () => {
+const CoinPage = (props) => {
+  let history = useHistory();
+
   const [coinData, setCoinData] = useState([]);
   const [coinInfo, setCoinInfo] = useState([]);
-  const [interval, setInterval] = useState("max");
+  const [interval, setInterval] = useState(10000);
 
-  const location = useLocation();
-  const parts = location.pathname.split("/");
-  const id = parts[parts.length - 1];
+  const id = props.match.params.id;
 
   useEffect(() => {
     getData();
@@ -23,15 +24,15 @@ const CoinPage = () => {
     const data = await axios.get(
       `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${interval}`
     );
-    const info = await axios.get(`https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false
+    const info = await axios.get(`https://api.coingecko.com/api/v3/coins/${id}
     `);
 
-    await setCoinData(data.data.prices);
+    setCoinData(data.data.prices);
 
-    await setCoinInfo(info.data);
+    setCoinInfo(info.data);
   };
 
-  function convertTime(unix) {
+  const convertTime = (unix) => {
     const a = new Date(unix);
     const months = [
       "Jan",
@@ -56,7 +57,7 @@ const CoinPage = () => {
     }
     if (interval <= 30) return `${date} ${month}`;
     return `${month} ${year}`;
-  }
+  };
 
   const renderGraph = () => {
     let dates = [];
@@ -125,7 +126,8 @@ const CoinPage = () => {
       responsiveAnimationDuration: 0,
     };
 
-    new Chart(ctx, {
+    if (window.myCharts !== undefined) window.myCharts.destroy();
+    window.myCharts = new Chart(ctx, {
       type: "line",
       data: data,
       options: options,
@@ -135,8 +137,12 @@ const CoinPage = () => {
   const renderTitle = () => {
     return (
       <div className="graph-title">
+        <AiFillCaretLeft
+          onClick={() => history.goBack()}
+          className="back-btn"
+        />
         <img src={coinInfo.image.small} alt="logo" />
-        <span className="graph-title-name">{id}</span>
+        <h1 className="graph-title-name">{id}</h1>
       </div>
     );
   };
@@ -146,19 +152,34 @@ const CoinPage = () => {
       <div className="graph-heading">
         {coinInfo.length !== 0 ? renderTitle() : null}
         <div className="interval-selector">
-          <button onClick={() => setInterval(1)} className="interval">
+          <button
+            onClick={() => setInterval(1)}
+            className={interval === 1 ? "interval underline" : "interval"}
+          >
             1d
           </button>
-          <button onClick={() => setInterval(7)} className="interval">
+          <button
+            onClick={() => setInterval(7)}
+            className={interval === 7 ? "interval underline" : "interval"}
+          >
             7d
           </button>
-          <button onClick={() => setInterval(30)} className="interval">
+          <button
+            onClick={() => setInterval(30)}
+            className={interval === 30 ? "interval underline" : "interval"}
+          >
             1m
           </button>
-          <button onClick={() => setInterval(356)} className="interval">
+          <button
+            onClick={() => setInterval(356)}
+            className={interval === 356 ? "interval underline" : "interval"}
+          >
             1y
           </button>
-          <button onClick={() => setInterval(10000)} className="interval">
+          <button
+            onClick={() => setInterval(10000)}
+            className={interval === 10000 ? "interval underline" : "interval"}
+          >
             Max
           </button>
         </div>

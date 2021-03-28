@@ -19,8 +19,16 @@
   align-items: center;
 }
 
+.back-btn {
+  width: 2vh;
+  height: 2vh;
+  color: white;
+}
+
 .graph-title-name {
+  margin: 0 0 0 1vh;
   font-size: 2rem;
+  color: white;
   text-transform: capitalize;
 }
 
@@ -40,7 +48,11 @@
   outline: none;
 }
 
+.underline {
+  border-bottom: 1px solid white;
+}
+
 #chart {
   width: 90% !important;
-  height: 60vh !important;
+  height: 80vh !important;
 }

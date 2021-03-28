@@ -27,7 +27,7 @@ const Coin = ({ input, coinData, currency }) => {
         <td>
           <img src={coinData.image} alt="logo" className="coin-logo" />
           <Link to={`/coinpage/${coinData.id}`}>{coinData.name}</Link>
-          <span className="coin-symbol">{coinData.symbol}</span>
+          <span className="coin-symbol"> {coinData.symbol}</span>
         </td>
         <td>
           {currencySymbol}
