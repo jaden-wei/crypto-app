@@ -32,17 +32,17 @@
 }
 
 .nav-text {
+  height: 60px;
   padding: 0;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   list-style: none;
-  height: 60px;
 }
 
 .nav-text a {
   margin: 0;
-  text-decoration: none;
+  text-decoration: none !important;
   color: black;
   font-size: 18px;
   display: flex;
