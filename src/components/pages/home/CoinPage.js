@@ -52,7 +52,7 @@ const CoinPage = () => {
     const date = a.getDate();
     const hour = a.getHours();
     if (interval === 1) {
-      return `${(hour + 11) % 12 + 1}${hour < 12 ? 'AM' : 'PM'}`;
+      return `${((hour + 11) % 12) + 1}${hour < 12 ? "AM" : "PM"}`;
     }
     if (interval <= 30) return `${date} ${month}`;
     return `${month} ${year}`;
@@ -63,11 +63,11 @@ const CoinPage = () => {
     let prices = [];
 
     for (let i = 0; i < coinData.length; i++) {
-      dates.push(coinData[i][0]);
+      dates.push(convertTime(coinData[i][0]));
       prices.push(Math.round(coinData[i][1] * 100) / 100);
     }
 
-    const ctx1 = document.getElementById("chart");
+    const ctx = document.getElementById("chart");
 
     const data = {
       labels: dates,
@@ -81,9 +81,13 @@ const CoinPage = () => {
       ],
     };
     const options = {
+      type: "LineWithLine",
+      tooltips: {
+        intersect: false,
+      },
       elements: {
         point: {
-          radius: 2,
+          radius: 0,
         },
       },
       legend: {
@@ -111,9 +115,6 @@ const CoinPage = () => {
               maxRotation: 0,
               minRotation: 0,
               maxTicksLimit: 11,
-              callback: function (value) {
-                return convertTime(value);
-              },
             },
           },
         ],
@@ -121,13 +122,10 @@ const CoinPage = () => {
       animation: {
         duration: 0,
       },
-      hover: {
-        animationDuration: 0,
-      },
       responsiveAnimationDuration: 0,
     };
 
-    new Chart(ctx1, {
+    new Chart(ctx, {
       type: "line",
       data: data,
       options: options,
@@ -165,7 +163,8 @@ const CoinPage = () => {
           </button>
         </div>
       </div>
-      <canvas id="chart" />
+      <canvas id="chart"></canvas>
+
       {coinData.length !== 0 ? renderGraph() : null}
     </div>
   );
