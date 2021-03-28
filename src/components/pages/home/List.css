@@ -26,6 +26,13 @@
   height: 5vh !important;
 }
 
+.table-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .table {
   width: 90% !important;
 }

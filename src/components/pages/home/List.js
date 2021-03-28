@@ -10,11 +10,11 @@ import Search from "./Search";
 const List = () => {
   const [cryptoData, setCryptoData] = useState([]);
   const [input, setInput] = useState("");
-  const [currency, setCurrency] = useState('usd');
+  const [currency, setCurrency] = useState("usd");
 
   useEffect(() => {
     updateData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currency]);
 
   const updateData = async () => {
@@ -27,7 +27,14 @@ const List = () => {
 
   const renderCoinData = () => {
     return cryptoData.map((coin, index) => {
-      return <Coin input={input} key={index} coinData={cryptoData[index]} currency={currency} />;
+      return (
+        <Coin
+          input={input}
+          key={index}
+          coinData={cryptoData[index]}
+          currency={currency}
+        />
+      );
     });
   };
 
@@ -38,19 +45,39 @@ const List = () => {
           id="dropdown-basic-button"
           title={currency.toUpperCase()}
         >
-          <ReactBootStrap.Dropdown.Item onClick={() => {setCurrency('usd')}}>
+          <ReactBootStrap.Dropdown.Item
+            onClick={() => {
+              setCurrency("usd");
+            }}
+          >
             USD (default)
           </ReactBootStrap.Dropdown.Item>
-          <ReactBootStrap.Dropdown.Item onClick={() => {setCurrency('eur')}}>
+          <ReactBootStrap.Dropdown.Item
+            onClick={() => {
+              setCurrency("eur");
+            }}
+          >
             EUR
           </ReactBootStrap.Dropdown.Item>
-          <ReactBootStrap.Dropdown.Item onClick={() => {setCurrency('gbp')}}>
+          <ReactBootStrap.Dropdown.Item
+            onClick={() => {
+              setCurrency("gbp");
+            }}
+          >
             GBP
           </ReactBootStrap.Dropdown.Item>
-          <ReactBootStrap.Dropdown.Item onClick={() => {setCurrency('cad')}}>
+          <ReactBootStrap.Dropdown.Item
+            onClick={() => {
+              setCurrency("cad");
+            }}
+          >
             CAD
           </ReactBootStrap.Dropdown.Item>
-          <ReactBootStrap.Dropdown.Item onClick={() => {setCurrency('jpy')}}>
+          <ReactBootStrap.Dropdown.Item
+            onClick={() => {
+              setCurrency("jpy");
+            }}
+          >
             JPY
           </ReactBootStrap.Dropdown.Item>
         </ReactBootStrap.DropdownButton>
@@ -63,8 +90,8 @@ const List = () => {
             <th>Name</th>
             <th>Price</th>
             <th>24h %</th>
-            <th>Market Cap</th>
-            <th>Total supply</th>
+            {window.screen.width >= 1280 ? <th>Market Cap</th> : null}
+            {window.screen.width >= 1280 ? <th>Volume</th> : null}
           </tr>
         </thead>
         {cryptoData.length > 0 ? <tbody>{renderCoinData()}</tbody> : null}
