@@ -126,12 +126,68 @@ const CoinPage = (props) => {
       responsiveAnimationDuration: 0,
     };
 
+    const mobileOptions = {
+      aspectRatio: 0.5,
+      type: "LineWithLine",
+      tooltips: {
+        intersect: false,
+      },
+      elements: {
+        point: {
+          radius: 0,
+        },
+      },
+      legend: {
+        display: false,
+      },
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              fontColor: "rgb(230,230,230)",
+              fontSize: 8,
+              padding: 10,
+              callback: function (value) {
+                return "$ " + value;
+              },
+            },
+          },
+        ],
+        xAxes: [
+          {
+            ticks: {
+              fontColor: "rgb(230,230,230)",
+              fontSize: 8,
+              padding: 10,
+              maxRotation: 0,
+              minRotation: 0,
+              maxTicksLimit: 5,
+            },
+          },
+        ],
+      },
+      animation: {
+        duration: 0,
+      },
+      responsiveAnimationDuration: 0,
+    };
+
     if (window.myCharts !== undefined) window.myCharts.destroy();
-    window.myCharts = new Chart(ctx, {
-      type: "line",
-      data: data,
-      options: options,
-    });
+
+    if (window.screen.width >= 1280) {
+      window.myCharts = new Chart(ctx, {
+        type: "line",
+        data: data,
+        options: options,
+      });
+    }
+    else {
+      window.myCharts = new Chart(ctx, {
+        type: "line",
+        data: data,
+        options: mobileOptions,
+      });
+    }
   };
 
   const renderTitle = () => {
@@ -141,8 +197,17 @@ const CoinPage = (props) => {
           onClick={() => history.goBack()}
           className="back-btn"
         />
-        <img src={coinInfo.image.small} alt="logo" />
-        <h1 className="graph-title-name">{id}</h1>
+        {window.screen.width >= 1280 ? (
+          <>
+            <img src={coinInfo.image.small} alt="logo" />
+            <h1 className="graph-title-name">{id}</h1>
+          </>
+        ) : (
+          <>
+            <img src={coinInfo.image.thumb} alt="logo" />
+            <h1 className="graph-title-name">{id}</h1>
+          </>
+        )}
       </div>
     );
   };
