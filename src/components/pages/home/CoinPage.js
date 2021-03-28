@@ -81,13 +81,6 @@ const CoinPage = () => {
       ],
     };
     const options = {
-      animation: {
-        duration: 0,
-      },
-      hover: {
-        animationDuration: 0,
-      },
-      responsiveAnimationDuration: 0,
       elements: {
         point: {
           radius: 2,
@@ -125,6 +118,13 @@ const CoinPage = () => {
           },
         ],
       },
+      animation: {
+        duration: 0,
+      },
+      hover: {
+        animationDuration: 0,
+      },
+      responsiveAnimationDuration: 0,
     };
 
     new Chart(ctx1, {

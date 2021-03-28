@@ -14,6 +14,7 @@ const List = () => {
 
   useEffect(() => {
     updateData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currency]);
 
   const updateData = async () => {
