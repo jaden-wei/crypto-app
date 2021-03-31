@@ -32,7 +32,7 @@ const Coin = ({ input, coinData, currency }) => {
           </td>
           <td>
             {currencySymbol}
-            {Math.round(coinData.current_price * 100) / 100}
+            {(Math.round(coinData.current_price * 100) / 100).toFixed(2)}
           </td>
           <td
             className={
@@ -45,7 +45,7 @@ const Coin = ({ input, coinData, currency }) => {
           </td>
           <td>
             {currencySymbol}
-            {Math.round(coinData.market_cap * 100) / 100}
+            {(Math.round(coinData.market_cap * 100) / 100)}
           </td>
           <td>{coinData.total_volume}</td>
         </tr>
@@ -61,7 +61,7 @@ const Coin = ({ input, coinData, currency }) => {
           </td>
           <td>
             {currencySymbol}
-            {Math.round(coinData.current_price * 100) / 100}
+            {(Math.round(coinData.current_price * 100) / 100).toFixed(2)}
           </td>
           <td
             className={
