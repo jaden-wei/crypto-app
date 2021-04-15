@@ -1,30 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Aos from "aos";
+import "aos/dist/aos.css";
 import "./App.css";
 
-// import Navbar from "./components/navbar/Navbar";
 import Home from "./components/pages/Home";
-// import News from "./components/pages/News";
-// import About from "./components/pages/About";
-// import Contact from "./components/pages/Contact";
+import List from "./components/pages/home/List";
 import CoinPage from "./components/pages/home/CoinPage";
 
-
 function App() {
-    return (
-        <div className="App">
-            <Router>
-                {/* <Navbar /> */}
-                <Switch>
-                    <Route path="/" exact component={Home}/>
-                    {/* <Route path="/news" component={News}/>
-                    <Route path="/about" component={About}/>
-                    <Route path="/contact" component={Contact}/> */}
-                    <Route path="/coinpage/:id" component={CoinPage}/>
-                </Switch>
-            </Router>
-        </div>
-    );
+  useEffect(() => {
+    Aos.init({ duration: 1500 });
+    Aos.refresh();
+  }, []);
+
+  return (
+    <div className="App">
+      <Router>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/list" component={List} />
+          <Route path="/coinpage/:id" component={CoinPage}/>
+        </Switch>
+      </Router>
+    </div>
+  );
 }
 
 export default App;

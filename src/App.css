@@ -1,6 +1,7 @@
 * {
     background: black;
-    font-family: "Poppins", sans-serif;
+    font-family: "Poppins", sans-serif important !important;
+    font-weight: 300;
 }
 
 .home, .news, .about, .contact {
