@@ -19,10 +19,14 @@ const List = () => {
   }, [currency]);
 
   const updateData = async () => {
-    const data = await axios.get(
-      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=1h,24h,7d,30d,1y`
-    );
-
+    let data;
+    try {
+      data = await axios.get(
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=1h,24h,7d,30d,1y`
+      );
+    } catch (err) {
+      console.error(err);
+    }
     setCryptoData(data.data);
   };
 
@@ -135,7 +139,7 @@ const List = () => {
             <th className={window.screen.width >= 1280 ? "text-align-end" : ""}>
               Price
             </th>
-            <th className={window.screen.width >= 1280 ? "text-align-end" : ""} >
+            <th className={window.screen.width >= 1280 ? "text-align-end" : ""}>
               {timeFrame}%
             </th>
             {window.screen.width >= 1280 ? (

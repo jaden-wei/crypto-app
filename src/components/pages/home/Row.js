@@ -54,7 +54,7 @@ const Coin = ({ input, coinData, currency, time }) => {
     }
   };
 
-  if (input.length === 0 || coinData.id.includes(input)) {
+  if (input.length === 0 || coinData.id.includes(input.toLowerCase())) {
     if (window.screen.width > 1280)
       return (
         <tr className="coin-table-row" data-aos="fade-up">
