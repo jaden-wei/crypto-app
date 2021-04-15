@@ -37,7 +37,7 @@
 }
 
 .filters > * {
-  margin-right: 5vh;
+  margin-right: 4vw;
 }
 
 .dropdown {
@@ -113,6 +113,9 @@ thead tr th {
   .coin-list td {
     font-size: 1rem;
     padding: 1vh;
+  }
+  .options-header {
+    display: none;
   }
 }
 

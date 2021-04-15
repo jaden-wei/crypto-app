@@ -94,3 +94,18 @@
     background-position: 0 0;
   }
 }
+
+@media (max-width: 1000px) {
+  .home-title {
+    font-size: 10vw;
+  }
+  .home-description {
+    font-size: 4vw;
+  }
+  .learn-more-btn {
+    font-size: 4vw;
+  }
+  .glow-on-hover:before {
+    opacity: 1;
+  }
+}

@@ -38,7 +38,6 @@ const Coin = ({ input, coinData, currency, time }) => {
   };
 
   const getPercentChange = () => {
-    console.log(time);
     switch (time) {
       case "1h":
         return coinData.price_change_percentage_1h_in_currency;
@@ -98,12 +97,12 @@ const Coin = ({ input, coinData, currency, time }) => {
           </td>
           <td
             className={
-              coinData.price_change_percentage_24h >= 0
+              getPercentChange() >= 0
                 ? "positive-change"
                 : "negative-change"
             }
           >
-            {simplify(coinData.price_change_percentage_24h)}%
+            {simplify(getPercentChange())}%
           </td>
         </tr>
       );

@@ -132,8 +132,12 @@ const List = () => {
         <thead data-aos="fade-up">
           <tr>
             <th>Cryptocurreny</th>
-            <th className="text-align-end">Price</th>
-            <th className="text-align-end">{timeFrame}%</th>
+            <th className={window.screen.width >= 1280 ? "text-align-end" : ""}>
+              Price
+            </th>
+            <th className={window.screen.width >= 1280 ? "text-align-end" : ""} >
+              {timeFrame}%
+            </th>
             {window.screen.width >= 1280 ? (
               <th className="text-align-end">Market Cap</th>
             ) : null}
