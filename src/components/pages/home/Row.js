@@ -84,7 +84,7 @@ const Coin = ({ input, coinData, currency, time }) => {
       );
     else
       return (
-        <tr className="coin-table-row">
+        <tr className="coin-table-row" data-aos="fade-up">
           <td>
             <img src={coinData.image} alt="logo" className="coin-logo" />
             <Link to={`/coinpage/${coinData.id}`}>
