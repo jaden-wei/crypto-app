@@ -5,7 +5,7 @@ import "aos/dist/aos.css";
 import "./App.css";
 
 import Home from "./components/pages/Home";
-import List from "./components/pages/home/List";
+import List from "./components/pages/home/list/List";
 import CoinPage from "./components/pages/home/CoinPage";
 
 function App() {

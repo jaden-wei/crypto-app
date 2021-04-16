@@ -22,12 +22,17 @@
 .back-btn {
   width: 2vh;
   height: 2vh;
+  margin-right: 5px;
   color: white;
+}
+
+img {
+  width: 30px;
 }
 
 .graph-title-name {
   margin: 0 0 0 1vh;
-  font-size: 2rem;
+  font-size: 2vh;
   color: white;
   text-transform: capitalize;
 }

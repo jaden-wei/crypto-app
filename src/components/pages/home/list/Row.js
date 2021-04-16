@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Coin = ({ input, coinData, currency, time }) => {
+const Coin = ({ input, index, coinData, currency, time }) => {
   let currencySymbol = "$";
 
   switch (currency) {
@@ -58,6 +58,7 @@ const Coin = ({ input, coinData, currency, time }) => {
     if (window.screen.width > 1280)
       return (
         <tr className="coin-table-row" data-aos="fade-up">
+          <td>{index + 1}</td>
           <td>
             <img src={coinData.image} alt="logo" className="coin-logo" />
             <Link to={`/coinpage/${coinData.id}`}>{coinData.name}</Link>
