@@ -1,6 +1,8 @@
 import React from "react";
 import * as ReactBootStrap from "react-bootstrap";
 
+import "./Dropdown.css";
+
 function DropdownMenus({ currency, timeFrame, setCurrency, setTimeFrame }) {
   return (
     <>

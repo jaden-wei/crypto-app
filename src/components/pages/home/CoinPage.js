@@ -82,6 +82,7 @@ const CoinPage = (props) => {
       ],
     };
     const options = {
+      aspectRatio: (window.screen.width < 1000 ? 0.5 : ''),
       type: "LineWithLine",
       tooltips: {
         intersect: false,
@@ -99,7 +100,9 @@ const CoinPage = (props) => {
           {
             ticks: {
               fontColor: "rgb(230,230,230)",
-              fontSize: 18,
+              fontSize: Math.round(
+                document.getElementById("chart").width / 150
+              ),
               padding: 40,
               callback: function (value) {
                 return "$ " + value;
@@ -111,57 +114,13 @@ const CoinPage = (props) => {
           {
             ticks: {
               fontColor: "rgb(230,230,230)",
-              fontSize: 18,
+              fontSize: Math.round(
+                document.getElementById("chart").width / 200
+              ),
               padding: 50,
               maxRotation: 0,
               minRotation: 0,
-              maxTicksLimit: 11,
-            },
-          },
-        ],
-      },
-      animation: {
-        duration: 0,
-      },
-      responsiveAnimationDuration: 0,
-    };
-
-    const mobileOptions = {
-      aspectRatio: 0.5,
-      type: "LineWithLine",
-      tooltips: {
-        intersect: false,
-      },
-      elements: {
-        point: {
-          radius: 0,
-        },
-      },
-      legend: {
-        display: false,
-      },
-      scales: {
-        yAxes: [
-          {
-            ticks: {
-              fontColor: "rgb(230,230,230)",
-              fontSize: 8,
-              padding: 10,
-              callback: function (value) {
-                return "$ " + value;
-              },
-            },
-          },
-        ],
-        xAxes: [
-          {
-            ticks: {
-              fontColor: "rgb(230,230,230)",
-              fontSize: 8,
-              padding: 10,
-              maxRotation: 0,
-              minRotation: 0,
-              maxTicksLimit: 5,
+              maxTicksLimit: (window.screen.width < 1000 ? 5 : 11),
             },
           },
         ],
@@ -174,20 +133,11 @@ const CoinPage = (props) => {
 
     if (window.myCharts !== undefined) window.myCharts.destroy();
 
-    if (window.screen.width >= 1280) {
-      window.myCharts = new Chart(ctx, {
-        type: "line",
-        data: data,
-        options: options,
-      });
-    }
-    else {
-      window.myCharts = new Chart(ctx, {
-        type: "line",
-        data: data,
-        options: mobileOptions,
-      });
-    }
+    window.myCharts = new Chart(ctx, {
+      type: "line",
+      data: data,
+      options: options,
+    });
   };
 
   const renderTitle = () => {
@@ -213,8 +163,8 @@ const CoinPage = (props) => {
   };
 
   return (
-    <div className="graph-container">
-      <div className="graph-heading">
+    <div className="chart-page-container">
+      <div className="page-heading">
         {coinInfo.length !== 0 ? renderTitle() : null}
         <div className="interval-selector">
           <button

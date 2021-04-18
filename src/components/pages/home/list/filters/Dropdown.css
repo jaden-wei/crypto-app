@@ -1,0 +1,17 @@
+.dropdown {
+  height: 100%;
+}
+
+#dropdown-basic-button {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 5px 0 0 5px;
+}
+
+#dropdown-basic-button:focus, #dropdown-basic-button:active {
+  outline: none;
+  box-shadow: none;
+}

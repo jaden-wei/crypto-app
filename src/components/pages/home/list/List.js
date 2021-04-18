@@ -63,7 +63,7 @@ const List = () => {
       <ReactBootStrap.Table borderless={true}>
         <thead data-aos="fade-up">
           <tr>
-            <th>#</th>
+            {window.screen.width >= 1280 ? <th>#</th> : ""}
             <th>Cryptocurreny</th>
             <th className={window.screen.width >= 1280 ? "text-align-end" : ""}>
               Price
