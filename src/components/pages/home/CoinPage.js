@@ -59,6 +59,25 @@ const CoinPage = (props) => {
     return `${month} ${year}`;
   };
 
+  const simplify = (num) => {
+    if (num === null) {
+      return 0;
+    }
+    if (num > 1000000000000) {
+      return (num / 1000000000000).toFixed(2) + "T";
+    }
+    if (num > 1000000000) {
+      return (num / 1000000000).toFixed(2) + "B";
+    }
+    if (num > 1000000) {
+      return (num / 1000000).toFixed(2) + "M";
+    }
+    if (num > 1000) {
+      return (num / 1000).toFixed() + "K";
+    }
+    return num.toFixed(2);
+  };
+
   const renderGraph = () => {
     let dates = [];
     let prices = [];
@@ -75,14 +94,18 @@ const CoinPage = (props) => {
       datasets: [
         {
           label: "Price",
+          // backgroundColor:
+          //   prices[prices.length - 1] - prices[0] > 0 ? "#a6de9b" : "#e8a9a7",
+          borderColor:
+            prices[prices.length - 1] - prices[0] > 0 ? "#36854b" : "#ba2613",
+          borderWidth: 2,
           data: prices,
           fill: false,
-          borderColor: "rgb(153, 153, 153)",
         },
       ],
     };
     const options = {
-      aspectRatio: (window.screen.width < 1000 ? 0.5 : ''),
+      aspectRatio: window.screen.width < 1000 ? 0.5 : "",
       type: "LineWithLine",
       tooltips: {
         intersect: false,
@@ -105,7 +128,7 @@ const CoinPage = (props) => {
               ),
               padding: 40,
               callback: function (value) {
-                return "$ " + value;
+                return "$ " + simplify(value);
               },
             },
           },
@@ -120,7 +143,7 @@ const CoinPage = (props) => {
               padding: 50,
               maxRotation: 0,
               minRotation: 0,
-              maxTicksLimit: (window.screen.width < 1000 ? 5 : 11),
+              maxTicksLimit: window.screen.width < 1000 ? 5 : 11,
             },
           },
         ],
